@@ -1,12 +1,18 @@
 #ouput:
-# v: False (which means v is NOT guilty)
-# W: False (which means w is NOT guilty)
-# solution not unique
 
-import sys
 from z3 import *
+import sys
+import math
 
-if len(sys.arv) > 2:
+def block_model(s):
+    m = s.model()
+    return Or([v != m[v] for v in x])
+
+def print_model(s):
+    m = s.model()
+    print(' '.join([str(m[v]) for v in x]))
+
+if len(sys.argv) > 2:
     raise SystemExit("There should be at most one argument")
 elif len(sys.argv) == 2:
     try:
@@ -19,5 +25,20 @@ else:
     N = 15 #default value
 
 x = [Int('x%s', i) for i in range(1, N+1, 1)]
+sqr = []
+s = Solver()
 
+for m in range(2*N+1):
+    sqr.append(m*m)
 
+for num in x:
+    num >= 1
+    num <= N
+
+Distinct(num)
+
+for k in range(1, N):
+    for j in range(len(sqr)):
+        num[k] + num[k+1] == sqr[j]  
+
+print(num)
