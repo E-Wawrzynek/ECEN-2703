@@ -1,5 +1,5 @@
 #output:
-
+#unable to solve
 
 from z3 import *
 
@@ -24,7 +24,7 @@ x = Int('x')
 y = Int('y')
 z = Int('z')
 
-sentence = ForAll([x], And((x < y), ForAll([z], Or(x >= z, z >= y))))
+sentence = ForAll([x], Exists([y], And((x < y), ForAll([z], Or(x >= z, z >= y)))))
 
 check_validity(sentence)
 
