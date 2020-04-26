@@ -11,7 +11,7 @@ def  Chromatic(G: Graph, k:int): #-> Optional[Coloring ]:
     """ Finds k-coloring  of G."""
     n = len(G)
     v = [Int('v%i' % i) for i in range(n)]
-    s = Solver ()
+    s = Solver()
     s.add([And(x>=0, x<k) for x in v])
     for i in range(n):
         s.add([v[i] != v[j] for j in G[i]])
